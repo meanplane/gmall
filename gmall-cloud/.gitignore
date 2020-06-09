@@ -1,0 +1,13 @@
+.idea/
+target/
+
+
+**/mvnw
+**/mvnw.cmd
+
+**/.mvn
+**/target/
+
+
+
+**/.gitignore

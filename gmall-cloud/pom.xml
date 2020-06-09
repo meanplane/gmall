@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.mp</groupId>
+    <artifactId>gmall</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>gmall</name>
+    <description>谷粒商城</description>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>gmall-common</module>
+        <module>gmall-coupon</module>
+        <module>gmall-member</module>
+        <module>gmall-order</module>
+        <module>gmall-ware</module>
+        <module>gmall-product</module>
+    </modules>
+
+</project>

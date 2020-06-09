@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    username: root
+    password: xxx123
+    url: jdbc:mysql://127.0.0.1:3306/gmall_sms?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+
+  application:
+    name: gmall-coupon
+
+
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+server:
+  port: 7000
+

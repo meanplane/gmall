@@ -1,0 +1,17 @@
+package com.mp.member.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.mp.common.bean.member.MemberStatisticsInfo;
+import org.apache.ibatis.annotations.Mapper;
+
+/**
+ * 会员统计信息
+ * 
+ * @author leifengyang
+ * @email leifengyang@gmail.com
+ * @date 2019-10-08 09:47:05
+ */
+@Mapper
+public interface MemberStatisticsInfoMapper extends BaseMapper<MemberStatisticsInfo> {
+	
+}
