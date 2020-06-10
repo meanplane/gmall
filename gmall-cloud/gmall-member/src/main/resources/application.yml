@@ -6,7 +6,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
 
   application:
-    name: gmall-coupon
+    name: gmall-member
   cloud:
     nacos:
       discovery:
@@ -18,5 +18,4 @@ mybatis-plus:
     db-config:
       id-type: auto
 server:
-  port: 7000
-
+  port: 8000

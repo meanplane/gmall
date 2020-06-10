@@ -3,6 +3,9 @@ package com.mp.product.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.mp.common.bean.product.Category;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * 商品三级分类
@@ -13,5 +16,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface CategoryMapper extends BaseMapper<Category> {
-	
+
+    @Select("select * from pms_category limit 5")
+    public List<Category> getAllCategorys();
 }

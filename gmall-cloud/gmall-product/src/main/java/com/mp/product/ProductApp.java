@@ -1,17 +1,17 @@
-package com.mp.coupon;
+package com.mp.product;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @Author: Xiaoer
- * @Date: 2020-06-09
+ * @Date: 2020-06-10
  */
 @SpringBootApplication
-@MapperScan("com.mp.coupon.mapper")
-public class CouponApplication {
+@EnableDiscoveryClient
+public class ProductApp {
     public static void main(String[] args) {
-        SpringApplication.run(CouponApplication.class,args);
+        SpringApplication.run(ProductApp.class,args);
     }
 }

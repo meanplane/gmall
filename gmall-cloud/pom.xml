@@ -19,6 +19,7 @@
         <module>gmall-order</module>
         <module>gmall-ware</module>
         <module>gmall-product</module>
+        <module>gmall-gateway</module>
     </modules>
 
 </project>

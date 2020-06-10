@@ -8,4 +8,5 @@ import com.mp.common.bean.coupon.Coupon;
  * @Date: 2020-06-09
  */
 public interface CouponMapper extends BaseMapper<Coupon> {
+
 }

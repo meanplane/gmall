@@ -1,7 +1,7 @@
 package com.mp.test.coupon;
 
 import com.mp.common.bean.coupon.Coupon;
-import com.mp.coupon.CouponApplication;
+import com.mp.coupon.CouponApp;
 import com.mp.coupon.mapper.CouponMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +16,7 @@ import java.util.List;
  * @Date: 2020-06-09
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = CouponApplication.class)
+@SpringBootTest(classes = CouponApp.class)
 public class Test1 {
     @Autowired
     private CouponMapper couponMapper;
