@@ -20,6 +20,7 @@
         <module>gmall-ware</module>
         <module>gmall-product</module>
         <module>gmall-gateway</module>
+        <module>gmall-admin</module>
     </modules>
 
 </project>
