@@ -7,14 +7,17 @@ spring:
         server-addr: mplane.cn:8848
     gateway:
       routes:
-        - id: test_route
-          uri: https://www.baidu.com
+        - id: product_route
+          uri: lb://gmall-product
           predicates:
-            - Query=url,baidu
-        - id: qq_route
-          uri: https://www.qq.com
+            - Path=/admin/product/**
+          filters:
+            - RewritePath=/admin/product/(?<segment>.*),/$\{segment}
+
+        - id: admin_route
+          uri: lb://gmall-admin
           predicates:
-            - Query=url,qq
+            - Path=/admin/**
 
 
 
