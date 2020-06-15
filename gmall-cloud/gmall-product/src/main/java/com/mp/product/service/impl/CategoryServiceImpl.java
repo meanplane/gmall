@@ -19,9 +19,11 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     public List<Category> listWithTree() {
         List<Category> categories = baseMapper.selectList(null);
         List<Category> collect = categories.stream()
-                .filter(category -> category.getParentCid() == 0)
-                .map(category -> {
-                    category.setChildren(getChildrens(category, categories));
+                .filter((menu) -> {
+                    return menu.getParentCid() != null && menu.getParentCid() == 0;
+
+                }).map((category) -> {
+                    category.setChildren(getChildrens(category.getCatId(), categories));
                     return category;
 
                 }).sorted((menu1, menu2) -> {
@@ -30,13 +32,13 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         return collect;
     }
 
-    private List<Category> getChildrens(Category root, List<Category> all) {
+    private List<Category> getChildrens(Long rootId, List<Category> all) {
         List<Category> children = all.stream()
-                .filter(category -> {
-                    return category.getParentCid() == root.getCatId();
+                .filter((menu) -> {
+                    return menu != null && menu.getParentCid().equals(rootId);
 
-                }).map(category -> {
-                    category.setChildren(getChildrens(category, all));
+                }).map((category) -> {
+                    category.setChildren(getChildrens(category.getCatId(), all));
                     return category;
 
                 }).sorted((menu1, menu2) -> {
@@ -45,4 +47,12 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
         return children;
     }
+
+    // 级联更新所有关联的数据
+    @Override
+    public void updateCasecade(Category category) {
+        this.updateById(category);
+        //categoryBrandRelationService.updateCategory(category.getCatId(),category.getName());
+    }
+
 }

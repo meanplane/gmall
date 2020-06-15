@@ -12,4 +12,7 @@ import java.util.List;
 public interface CategoryService extends IService<Category> {
 
     public List<Category> listWithTree();
+
+    public void updateCasecade(Category category);
+
 }
