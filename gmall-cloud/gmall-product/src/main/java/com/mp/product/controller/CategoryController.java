@@ -28,10 +28,10 @@ public class CategoryController {
         return R.ok().put("data", categories);
     }
 
-    @RequestMapping("/delete")
-    public R deleteList(@RequestBody Long[] ids) {
-        categoryService.removeByIds(Arrays.asList(ids));
-        return R.ok();
+    @RequestMapping("/info/{cid}")
+    public R getInfo(@PathVariable("cid") Long cid) {
+        Category category = categoryService.getById(cid);
+        return R.ok().put("data", category);
     }
 
     @RequestMapping("/save")
@@ -52,9 +52,12 @@ public class CategoryController {
         return R.ok();
     }
 
-    @RequestMapping("/info/{cid}")
-    public R getInfo(@PathVariable("cid") Long cid){
-        Category category = categoryService.getById(cid);
-        return R.ok().put("data",category);
+
+    @RequestMapping("/delete")
+    public R deleteList(@RequestBody Long[] ids) {
+        categoryService.removeByIds(Arrays.asList(ids));
+        return R.ok();
     }
+
+
 }

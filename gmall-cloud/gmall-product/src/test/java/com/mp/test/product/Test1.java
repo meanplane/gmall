@@ -1,8 +1,7 @@
 package com.mp.test.product;
 
 import com.mp.product.ProductApp;
-import com.mp.product.mapper.CategoryMapper;
-import com.mp.product.service.CategoryService;
+import com.mp.product.service.BrandService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class Test1 {
 
     @Autowired
-    CategoryService categoryService;
-
-    @Autowired
-    CategoryMapper categoryMapper;
+    private BrandService brandService;
 
     @Test
     public void test1(){
