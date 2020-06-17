@@ -29,7 +29,7 @@
       <el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
       <el-table-column prop="brandId" header-align="center" align="center" label="品牌id"></el-table-column>
       <el-table-column prop="name" header-align="center" align="center" label="品牌名"></el-table-column>
-      <el-table-column prop="logo" header-align="center" align="center" label="品牌logo地址">
+      <el-table-column prop="logo" header-align="center" align="center" label="logo">
         <template slot-scope="scope">
           <!-- <el-image
               style="width: 100px; height: 80px"

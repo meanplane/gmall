@@ -5,6 +5,7 @@ spring:
     nacos:
       discovery:
         server-addr: mplane.cn:8848
+        ip: 127.0.0.1
     gateway:
       routes:
         - id: product_route

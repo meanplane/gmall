@@ -1,12 +1,11 @@
 package com.mp.product.controller;
 
+import com.mp.common.bean.product.Brand;
 import com.mp.common.utils.PageUtils;
 import com.mp.common.utils.R;
 import com.mp.product.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -26,5 +25,37 @@ public class BrandController {
         PageUtils page = brandService.queryPage(params);
         return R.ok().put("page", page);
     }
+
+
+    @RequestMapping("/info/{bid}")
+    public R info(@PathVariable("bid") Long bid) {
+        Brand brand = brandService.getById(bid);
+        return R.ok().put("brand", brand);
+    }
+
+
+    /**
+     * 保存
+     */
+    @RequestMapping("/save")
+    public R save(@RequestBody Brand brand) {
+        brandService.save(brand);
+        return R.ok();
+    }
+
+    @RequestMapping("/update")
+    public R update(@RequestBody Brand brand){
+        brandService.updateById(brand);
+        // TODO 关联分类
+        return R.ok();
+    }
+
+    @RequestMapping("/update/status")
+    public R updateStatus(@RequestBody Brand brand){
+        brandService.updateById(brand);
+        return R.ok();
+    }
+
+
 
 }

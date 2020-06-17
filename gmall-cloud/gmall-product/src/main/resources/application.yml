@@ -11,6 +11,14 @@ spring:
     nacos:
       discovery:
         server-addr: mplane.cn:8848
+        ip: 127.0.0.1
+  redis:
+    host: mplane.cn
+    database: 0
+    port: 6379
+    password: xxx123
+
+
 
 
 mybatis-plus:
