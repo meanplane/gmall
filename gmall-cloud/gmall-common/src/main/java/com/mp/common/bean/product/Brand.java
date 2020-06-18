@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * 品牌
- * 
+ *
  * @author leifengyang
  * @email leifengyang@gmail.com
  * @date 2019-10-01 21:08:49
@@ -49,7 +49,7 @@ public class Brand implements Serializable {
 	/**
 	 * 检索首字母
 	 */
-//	@NotEmpty(groups={AddGroup.class})
+//	@NotEmpty
 //	@Pattern(regexp="^[a-zA-Z]$",message = "检索首字母必须是一个字母",groups={AddGroup.class,UpdateGroup.class})
 	private String firstLetter;
 	/**

@@ -1,5 +1,6 @@
 package com.mp.common.utils;
 
+import com.mp.common.exception.GExceptionEnum;
 import org.apache.http.HttpStatus;
 
 import java.util.HashMap;
@@ -18,6 +19,10 @@ public class R extends HashMap<String, Object> {
 
     public static R error() {
         return error(HttpStatus.SC_INTERNAL_SERVER_ERROR, "未知异常，请联系管理员");
+    }
+
+    public static R error(GExceptionEnum gExceptionEnum) {
+        return error(gExceptionEnum.getCode(), gExceptionEnum.getMsg());
     }
 
     public static R error(String msg) {

@@ -44,18 +44,15 @@ public class BrandController {
     }
 
     @RequestMapping("/update")
-    public R update(@RequestBody Brand brand){
-        brandService.updateById(brand);
-        // TODO 关联分类
+    public R update(@RequestBody Brand brand) {
+        brandService.updateDetail(brand);
         return R.ok();
     }
 
     @RequestMapping("/update/status")
-    public R updateStatus(@RequestBody Brand brand){
+    public R updateStatus(@RequestBody Brand brand) {
         brandService.updateById(brand);
         return R.ok();
     }
-
-
 
 }

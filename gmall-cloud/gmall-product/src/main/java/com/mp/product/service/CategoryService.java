@@ -15,4 +15,5 @@ public interface CategoryService extends IService<Category> {
 
     public void updateCasecade(Category category);
 
+    Long[] findCatelogPath(Long catelogId);
 }
