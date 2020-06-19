@@ -22,8 +22,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-17
+ * Author: Xiaoer
+ * Date: 2020-06-17
  */
 @Service
 @Slf4j

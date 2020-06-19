@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-10
+ * Author: Xiaoer
+ * Date: 2020-06-10
  */
 @RefreshScope
 @RestController

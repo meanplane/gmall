@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-10
+ * Author: Xiaoer
+ * Date: 2020-06-10
  */
 @EnableDiscoveryClient
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})

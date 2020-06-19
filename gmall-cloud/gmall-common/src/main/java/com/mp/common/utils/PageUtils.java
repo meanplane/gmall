@@ -6,8 +6,8 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-16
+ * Author: Xiaoer
+ * Date: 2020-06-16
  */
 public class PageUtils implements Serializable {
 

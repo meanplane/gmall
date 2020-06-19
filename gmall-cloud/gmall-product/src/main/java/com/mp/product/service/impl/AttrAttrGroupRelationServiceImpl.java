@@ -7,8 +7,8 @@ import com.mp.product.service.AttrAttrGroupRelationService;
 import org.springframework.stereotype.Service;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-18
+ * Author: Xiaoer
+ * Date: 2020-06-18
  */
 @Service
 public class AttrAttrGroupRelationServiceImpl extends ServiceImpl<AttrAttrgroupRelationMapper, AttrAttrgroupRelation> implements AttrAttrGroupRelationService {

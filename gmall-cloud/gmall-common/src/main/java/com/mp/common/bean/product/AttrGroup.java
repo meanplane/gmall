@@ -6,10 +6,11 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 属性分组
- * 
+ *
  * @author leifengyang
  * @email leifengyang@gmail.com
  * @date 2019-10-01 21:08:49
@@ -42,11 +43,11 @@ public class AttrGroup implements Serializable {
 	/**
 	 * 所属分类id
 	 */
-	private Long catelogId;
+	private Long categoryId;
 
 
 	@TableField(exist = false)
-	private Long[] catelogPath;
+	private List<Long> categoryPath;
 
 
 }

@@ -7,14 +7,14 @@ import com.mp.common.utils.PageUtils;
 import java.util.Map;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-18
+ * Author: Xiaoer
+ * Date: 2020-06-18
  */
 public interface AttrGroupService extends IService<AttrGroup> {
 
     PageUtils queryPage(Map<String, Object> params);
 
-    PageUtils queryPage(Map<String, Object> params, Long catelogId);
+    PageUtils queryPage(Map<String, Object> params, Long categoryId);
 
-//    List<AttrGroupWithAttrsVo> getAttrGroupWithAttrsByCatelogId(Long catelogId);
+//    List<AttrGroupWithAttrsVo> getAttrGroupWithAttrsByCategoryId(Long categoryId);
 }

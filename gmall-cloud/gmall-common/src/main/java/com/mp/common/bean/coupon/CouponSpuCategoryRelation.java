@@ -7,8 +7,8 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-09
+ * Author: Xiaoer
+ * Date: 2020-06-09
  */
 @Data
 @TableName("sms_coupon_spu_category_relation")

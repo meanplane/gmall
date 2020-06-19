@@ -8,8 +8,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-09
+ * Author: Xiaoer
+ * Date: 2020-06-09
  */
 @Data
 @TableName("sms_coupon_history")

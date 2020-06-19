@@ -6,14 +6,16 @@ import com.mp.common.bean.product.Category;
 import java.util.List;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-10
+ * Author: Xiaoer
+ * Date: 2020-06-10
  */
 public interface CategoryService extends IService<Category> {
 
     public List<Category> listWithTree();
 
-    public void updateCasecade(Category category);
+    public void updateCascade(Category category);
 
-    Long[] findCatelogPath(Long catelogId);
+    List<Long> findCategoryPath(Long categoryId);
+
+    void removeCascade(List<Long> asList);
 }

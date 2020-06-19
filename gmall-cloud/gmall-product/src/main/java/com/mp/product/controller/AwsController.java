@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-17
+ * Author: Xiaoer
+ * Date: 2020-06-17
  */
 @RestController
 @RequestMapping("/aws")

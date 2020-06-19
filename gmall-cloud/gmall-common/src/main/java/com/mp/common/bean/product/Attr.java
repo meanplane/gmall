@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * 商品属性
- * 
+ *
  * @author leifengyang
  * @email leifengyang@gmail.com
  * @date 2019-10-01 21:08:49
@@ -53,7 +53,7 @@ public class Attr implements Serializable {
 	/**
 	 * 所属分类
 	 */
-	private Long catelogId;
+	private Long categoryId;
 	/**
 	 * 快速展示【是否展示在介绍上；0-否 1-是】，在sku中仍然可以调整
 	 */

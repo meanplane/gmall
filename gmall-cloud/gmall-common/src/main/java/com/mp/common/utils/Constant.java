@@ -1,8 +1,8 @@
 package com.mp.common.utils;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-16
+ * Author: Xiaoer
+ * Date: 2020-06-16
  */
 public class Constant {
     /** 超级管理员ID */
@@ -27,4 +27,5 @@ public class Constant {
      *  升序
      */
     public static final String ASC = "asc";
+
 }

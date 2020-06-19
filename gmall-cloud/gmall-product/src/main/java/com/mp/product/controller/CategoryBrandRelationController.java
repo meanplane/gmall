@@ -5,7 +5,7 @@ import com.mp.common.bean.product.Brand;
 import com.mp.common.bean.product.CategoryBrandRelation;
 import com.mp.common.utils.PageUtils;
 import com.mp.common.utils.R;
-import com.mp.product.controller.vo.BrandVo;
+import com.mp.product.vo.*;
 import com.mp.product.service.CategoryBrandRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +16,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-18
+ * Author: Xiaoer
+ * Date: 2020-06-18
  */
 @RestController
 @RequestMapping("/categorybrandrelation")
@@ -28,9 +28,9 @@ public class CategoryBrandRelationController {
     /**
      * 获取当前品牌关联的所有分类列表
      */
-    @GetMapping("/catelog/list")
+    @GetMapping("/category/list")
     //@RequiresPermissions("product:categorybrandrelation:list")
-    public R cateloglist(@RequestParam("brandId")Long brandId){
+    public R categorylist(@RequestParam("brandId")Long brandId){
         List<CategoryBrandRelation> data = categoryBrandRelationService.list(
                 new QueryWrapper<CategoryBrandRelation>().eq("brand_id",brandId)
         );

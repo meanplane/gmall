@@ -8,17 +8,13 @@ import java.io.Serializable;
 
 /**
  * 品牌分类关联
- * 
- * @author leifengyang
- * @email leifengyang@gmail.com
- * @date 2019-11-17 21:25:25
  */
 @Data
 @TableName("pms_category_brand_relation")
 public class CategoryBrandRelation implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	@TableId
 	private Long id;
@@ -29,14 +25,14 @@ public class CategoryBrandRelation implements Serializable {
 	/**
 	 * 分类id
 	 */
-	private Long catelogId;
+	private Long categoryId;
 	/**
-	 * 
+	 *
 	 */
 	private String brandName;
 	/**
-	 * 
+	 *
 	 */
-	private String catelogName;
+	private String categoryName;
 
 }

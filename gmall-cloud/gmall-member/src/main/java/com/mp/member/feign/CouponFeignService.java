@@ -5,8 +5,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-10
+ * Author: Xiaoer
+ * Date: 2020-06-10
  */
 @FeignClient("gmall-coupon")
 public interface CouponFeignService {

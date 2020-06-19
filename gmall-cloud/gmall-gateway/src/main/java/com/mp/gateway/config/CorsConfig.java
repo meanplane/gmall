@@ -7,8 +7,8 @@ import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-12
+ * Author: Xiaoer
+ * Date: 2020-06-12
  */
 @Configuration
 public class CorsConfig {

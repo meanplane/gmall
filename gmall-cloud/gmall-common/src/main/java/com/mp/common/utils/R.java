@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-10
+ * Author: Xiaoer
+ * Date: 2020-06-10
  */
 public class R extends HashMap<String, Object> {
 

@@ -23,5 +23,8 @@ public interface CategoryBrandRelationService extends IService<CategoryBrandRela
 
     List<Brand> getBrandsByCatId(Long catId);
 
+    void deleteCategory(List<Long> ids);
+
+    void deleteBrand(List<Long> bids);
 }
 

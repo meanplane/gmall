@@ -2,6 +2,7 @@ package com.mp.test.product;
 
 import com.mp.product.ProductApp;
 import com.mp.product.service.BrandService;
+import com.mp.product.service.CategoryBrandRelationService;
 import com.mp.product.service.impl.AwsServiceImpl;
 import com.mp.product.utils.RedisUtils;
 import org.junit.Test;
@@ -13,8 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Map;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-10
+ * Author: Xiaoer
+ * Date: 2020-06-10
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ProductApp.class)
@@ -29,6 +30,9 @@ public class Test1 {
     @Autowired
     private RedisUtils redisUtils;
 
+    @Autowired
+    private CategoryBrandRelationService categoryBrandRelationService;
+
     @Test
     public void testRedis() throws Exception {
         Map<String, Object> stsToken = awsService.getStsToken("1000010", 21600L);
@@ -36,7 +40,12 @@ public class Test1 {
     }
 
     @Test
-    public void testRedis1(){
+    public void testRedis1() {
         redisUtils.del("awskey");
+    }
+
+    @Test
+    public void testSql() {
+
     }
 }

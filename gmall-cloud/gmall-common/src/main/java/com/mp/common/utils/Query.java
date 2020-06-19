@@ -9,8 +9,8 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Map;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-16
+ * Author: Xiaoer
+ * Date: 2020-06-16
  */
 public class Query<T> {
 

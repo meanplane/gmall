@@ -12,8 +12,8 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-17
+ * Author: Xiaoer
+ * Date: 2020-06-17
  */
 @Component
 public class RedisUtils {

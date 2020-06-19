@@ -7,11 +7,12 @@ import com.mp.product.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-16
+ * Author: Xiaoer
+ * Date: 2020-06-16
  */
 @RestController
 @RequestMapping("/brand")
@@ -52,6 +53,12 @@ public class BrandController {
     @RequestMapping("/update/status")
     public R updateStatus(@RequestBody Brand brand) {
         brandService.updateById(brand);
+        return R.ok();
+    }
+
+    @RequestMapping("/delete")
+    public R delete(@RequestBody List<Long> bids){
+        brandService.removeCascade(bids);
         return R.ok();
     }
 

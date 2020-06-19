@@ -13,8 +13,8 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-17
+ * Author: Xiaoer
+ * Date: 2020-06-17
  */
 
 @Configuration

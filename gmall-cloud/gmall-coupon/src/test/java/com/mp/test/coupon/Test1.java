@@ -12,8 +12,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-09
+ * Author: Xiaoer
+ * Date: 2020-06-09
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = CouponApp.class)

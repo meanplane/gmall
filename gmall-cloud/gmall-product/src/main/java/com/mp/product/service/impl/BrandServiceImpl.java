@@ -14,11 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-16
+ * Author: Xiaoer
+ * Date: 2020-06-16
  */
 @Service
 public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements BrandService {
@@ -49,5 +50,12 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 
             //TODO 更新其他关联
         }
+    }
+
+    @Transactional
+    @Override
+    public void removeCascade(List<Long> bids) {
+        this.removeByIds(bids);
+        categoryBrandRelationService.deleteBrand(bids);
     }
 }

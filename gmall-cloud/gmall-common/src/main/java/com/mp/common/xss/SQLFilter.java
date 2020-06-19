@@ -1,8 +1,8 @@
 package com.mp.common.xss;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-16
+ * Author: Xiaoer
+ * Date: 2020-06-16
  */
 
 import org.apache.commons.lang3.StringUtils;

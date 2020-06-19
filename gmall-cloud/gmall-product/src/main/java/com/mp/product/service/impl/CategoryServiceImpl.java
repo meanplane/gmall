@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-10
+ * Author: Xiaoer
+ * Date: 2020-06-10
  */
 @Service
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService {
@@ -59,28 +59,33 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     // 级联更新所有关联的数据
     @Transactional
     @Override
-    public void updateCasecade(Category category) {
+    public void updateCascade(Category category) {
         this.updateById(category);
         categoryBrandRelationService.updateCategory(category.getCatId(),category.getName());
     }
 
     // [2,25,225]
     @Override
-    public Long[] findCatelogPath(Long catelogId) {
+    public List<Long> findCategoryPath(Long categoryId) {
         List<Long> paths = new ArrayList<>();
-        List<Long> parentPath = findParentPath(catelogId, paths);
-
+        List<Long> parentPath = findParentPath(categoryId, paths);
         Collections.reverse(parentPath);
 
+        return parentPath;
+    }
 
-        return parentPath.toArray(new Long[parentPath.size()]);
+    @Transactional
+    @Override
+    public void removeCascade(List<Long> asList) {
+        this.removeByIds(asList);
+        categoryBrandRelationService.deleteCategory(asList);
     }
 
     //225,25,2
-    private List<Long> findParentPath(Long catelogId,List<Long> paths){
+    private List<Long> findParentPath(Long categoryId,List<Long> paths){
         //1、收集当前节点id
-        paths.add(catelogId);
-        Category byId = this.getById(catelogId);
+        paths.add(categoryId);
+        Category byId = this.getById(categoryId);
         if(byId.getParentCid()!=0){
             findParentPath(byId.getParentCid(),paths);
         }

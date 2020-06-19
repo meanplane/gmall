@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashMap;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-18
+ * Author: Xiaoer
+ * Date: 2020-06-18
  */
 
 @Slf4j

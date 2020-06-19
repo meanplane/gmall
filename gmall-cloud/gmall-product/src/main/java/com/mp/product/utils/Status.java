@@ -3,8 +3,8 @@ package com.mp.product.utils;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-17
+ * Author: Xiaoer
+ * Date: 2020-06-17
  */
 public abstract  class Status {
 

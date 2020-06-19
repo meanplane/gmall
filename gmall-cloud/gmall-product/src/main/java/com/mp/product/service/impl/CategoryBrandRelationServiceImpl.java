@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
-@Service("categoryBrandRelationService")
+@Service
 public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandRelationMapper, CategoryBrandRelation> implements CategoryBrandRelationService {
 
     @Autowired
@@ -50,13 +50,13 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
     @Override
     public void saveDetail(CategoryBrandRelation categoryBrandRelation) {
         Long brandId = categoryBrandRelation.getBrandId();
-        Long catelogId = categoryBrandRelation.getCatelogId();
+        Long categoryId = categoryBrandRelation.getCategoryId();
         //1、查询详细名字
         Brand brandEntity = brandMapper.selectById(brandId);
-        Category categoryEntity = categoryMapper.selectById(catelogId);
+        Category categoryEntity = categoryMapper.selectById(categoryId);
 
         categoryBrandRelation.setBrandName(brandEntity.getName());
-        categoryBrandRelation.setCatelogName(categoryEntity.getName());
+        categoryBrandRelation.setCategoryName(categoryEntity.getName());
 
         this.save(categoryBrandRelation);
 
@@ -67,27 +67,37 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
         CategoryBrandRelation relationEntity = new CategoryBrandRelation();
         relationEntity.setBrandId(brandId);
         relationEntity.setBrandName(name);
-        this.update(relationEntity,new UpdateWrapper<CategoryBrandRelation>().eq("brand_id",brandId));
+        this.update(relationEntity, new UpdateWrapper<CategoryBrandRelation>().eq("brand_id", brandId));
     }
 
     @Override
     public void updateCategory(Long catId, String name) {
         CategoryBrandRelation relationEntity = new CategoryBrandRelation();
-        relationEntity.setCatelogId(catId);
-        relationEntity.setCatelogName(name);
-        this.update(relationEntity,new UpdateWrapper<CategoryBrandRelation>().eq("catelog_id",catId));
+        relationEntity.setCategoryId(catId);
+        relationEntity.setCategoryName(name);
+        this.update(relationEntity, new UpdateWrapper<CategoryBrandRelation>().eq("category_id", catId));
     }
 
     @Override
     public List<Brand> getBrandsByCatId(Long catId) {
 
-        List<CategoryBrandRelation> catelogId = relationMapper.selectList(new QueryWrapper<CategoryBrandRelation>().eq("catelog_id", catId));
-        List<Brand> collect = catelogId.stream().map(item -> {
+        List<CategoryBrandRelation> categoryId = relationMapper.selectList(new QueryWrapper<CategoryBrandRelation>().eq("category_id", catId));
+        List<Brand> collect = categoryId.stream().map(item -> {
             Long brandId = item.getBrandId();
             Brand byId = brandService.getById(brandId);
             return byId;
         }).collect(Collectors.toList());
         return collect;
+    }
+
+    @Override
+    public void deleteCategory(List<Long> ids) {
+        this.remove(new QueryWrapper<CategoryBrandRelation>().in("category_id", ids));
+    }
+
+    @Override
+    public void deleteBrand(List<Long> bids) {
+        this.remove(new QueryWrapper<CategoryBrandRelation>().in("brand_id", bids));
     }
 
 }

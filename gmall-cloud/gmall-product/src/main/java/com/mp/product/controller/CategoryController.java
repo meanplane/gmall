@@ -2,6 +2,7 @@ package com.mp.product.controller;
 
 import com.mp.common.bean.product.Category;
 import com.mp.common.utils.R;
+import com.mp.product.service.CategoryBrandRelationService;
 import com.mp.product.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,14 +14,17 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-11
+ * Author: Xiaoer
+ * Date: 2020-06-11
  */
 @RestController
 @RequestMapping("/category")
 public class CategoryController {
     @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    CategoryBrandRelationService categoryBrandRelationService;
 
     @RequestMapping("/list/tree")
     public R listTree() {
@@ -48,14 +52,14 @@ public class CategoryController {
 
     @RequestMapping("/update")
     public R updateCategory(@RequestBody Category category) {
-        categoryService.updateCasecade(category);
+        categoryService.updateCascade(category);
         return R.ok();
     }
 
 
     @RequestMapping("/delete")
     public R deleteList(@RequestBody Long[] ids) {
-        categoryService.removeByIds(Arrays.asList(ids));
+        categoryService.removeCascade(Arrays.asList(ids));
         return R.ok();
     }
 

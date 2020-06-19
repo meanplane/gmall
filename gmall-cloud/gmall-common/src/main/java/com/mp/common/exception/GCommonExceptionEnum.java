@@ -1,8 +1,8 @@
 package com.mp.common.exception;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-18
+ * Author: Xiaoer
+ * Date: 2020-06-18
  */
 public enum GCommonExceptionEnum implements GExceptionEnum {
     SYS_ERROR(10000, "系统错误"),

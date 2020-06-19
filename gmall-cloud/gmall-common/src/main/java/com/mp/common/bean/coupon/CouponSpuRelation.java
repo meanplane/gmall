@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
- * @Author: Xiaoer
- * @Date: 2020-06-09
+ * Author: Xiaoer
+ * Date: 2020-06-09
  */
 @Data
 @TableName("sms_coupon_spu_relation")
