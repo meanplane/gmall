@@ -1,7 +1,8 @@
 .idea/
 target/
 
-
+#**/.iml
+*.iml
 **/mvnw
 **/mvnw.cmd
 
@@ -9,5 +10,3 @@ target/
 **/target/
 
 
-
-**/.gitignore

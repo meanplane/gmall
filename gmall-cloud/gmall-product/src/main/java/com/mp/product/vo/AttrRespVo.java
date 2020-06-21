@@ -3,6 +3,7 @@ package com.mp.product.vo;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 public class AttrRespVo implements Serializable {
@@ -55,5 +56,5 @@ public class AttrRespVo implements Serializable {
     private String categoryName;
     private String groupName;
 
-    private Long[] categoryPath;
+    private List<Long> categoryPath;
 }
