@@ -1,8 +1,8 @@
 spring:
   datasource:
     username: root
-    password: xxx123
-    url: jdbc:mysql://localhost:3306/gmall_pms?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    password: 28Z3Vay5
+    url: jdbc:mysql://120.79.17.186:3306/gmall_pms?useUnicode=true&characterEncoding=utf-8&useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
 
   application:
@@ -11,7 +11,6 @@ spring:
     nacos:
       discovery:
         server-addr: mplane.cn:8848
-        ip: 127.0.0.1
   redis:
     host: mplane.cn
     database: 0

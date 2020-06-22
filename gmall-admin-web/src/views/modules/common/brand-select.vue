@@ -38,7 +38,7 @@ export default {
   //监控data中的数据变化
   watch: {
     brandId(val) {
-      // this.PubSub.publish("brandId", val);
+      this.PubSub.publish("brandId", val);
     }
   },
   //方法集合
@@ -70,7 +70,7 @@ export default {
   beforeUpdate() {}, //生命周期 - 更新之前
   updated() {}, //生命周期 - 更新之后
   beforeDestroy() {
-    // PubSub.unsubscribe(this.subscribe); //销毁订阅
+    PubSub.unsubscribe(this.subscribe); //销毁订阅
   }, //生命周期 - 销毁之前
   destroyed() {}, //生命周期 - 销毁完成
   activated() {} //如果页面有keep-alive缓存功能，这个函数会触发

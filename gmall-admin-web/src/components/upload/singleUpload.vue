@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-  import {policy, getSecret, uploadFile} from './policy'
+  import { getSecret, uploadFile} from './policy'
   import {getUUID} from '@/utils'
 
   export default {

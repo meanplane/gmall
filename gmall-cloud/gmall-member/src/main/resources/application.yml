@@ -1,8 +1,8 @@
 spring:
   datasource:
     username: root
-    password: xxx123
-    url: jdbc:mysql://maplane.cn:3306/gmall_sms?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    password: 28Z3Vay5
+    url: jdbc:mysql://120.79.17.186:3306/gmall_ums?useUnicode=true&characterEncoding=utf-8&useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
 
   application:
@@ -17,5 +17,9 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 server:
   port: 8000

@@ -2,6 +2,7 @@
   <div>
     <el-upload
       action="http://gulimall-hello.oss-cn-beijing.aliyuncs.com"
+      :http-request="httpRequest"
       :data="dataObj"
       :list-type="listType"
       :file-list="fileList"
@@ -21,7 +22,7 @@
   </div>
 </template>
 <script>
-import { policy } from "./policy";
+import { policy, getSecret, uploadFile} from "./policy";
 import { getUUID } from '@/utils'
 export default {
   name: "multiUpload",
@@ -85,32 +86,52 @@ export default {
       this.dialogImageUrl = file.url;
     },
     beforeUpload(file) {
-      let _self = this;
-      return new Promise((resolve, reject) => {
-        policy()
-          .then(response => {
-            console.log("这是什么${filename}");
-            _self.dataObj.policy = response.data.policy;
-            _self.dataObj.signature = response.data.signature;
-            _self.dataObj.ossaccessKeyId = response.data.accessid;
-            _self.dataObj.key = response.data.dir +getUUID()+"_${filename}";
-            _self.dataObj.dir = response.data.dir;
-            _self.dataObj.host = response.data.host;
-            resolve(true);
-          })
-          .catch(err => {
-            console.log("出错了...",err)
-            reject(false);
-          });
-      });
+      // let _self = this;
+      // return new Promise((resolve, reject) => {
+      //   policy()
+      //     .then(response => {
+      //       console.log("这是什么${filename}");
+      //       _self.dataObj.policy = response.data.policy;
+      //       _self.dataObj.signature = response.data.signature;
+      //       _self.dataObj.ossaccessKeyId = response.data.accessid;
+      //       _self.dataObj.key = response.data.dir +getUUID()+"_${filename}";
+      //       _self.dataObj.dir = response.data.dir;
+      //       _self.dataObj.host = response.data.host;
+      //       resolve(true);
+      //     })
+      //     .catch(err => {
+      //       console.log("出错了...",err)
+      //       reject(false);
+      //     });
+      // });
     },
+    httpRequest({file}) {
+      getSecret().then(response => {
+        let accessKey = response.accessKey;
+        let secretKey = response.secretKey;
+        uploadFile(file, secretKey, accessKey).then(res => {
+          // 上传成功
+          console.log('上传成功...')
+          this.fileList.push({
+            name: res.key,
+            url: res.Location
+          });
+          this.emitInput(this.fileList);
+        }).catch(err => {
+          console.log(err)
+        })
+      }).catch( err => {
+        console.log(err)
+      })
+    },
+
     handleUploadSuccess(res, file) {
-      this.fileList.push({
-        name: file.name,
-        // url: this.dataObj.host + "/" + this.dataObj.dir + "/" + file.name； 替换${filename}为真正的文件名
-        url: this.dataObj.host + "/" + this.dataObj.key.replace("${filename}",file.name)
-      });
-      this.emitInput(this.fileList);
+      // this.fileList.push({
+      //   name: file.name,
+      //   // url: this.dataObj.host + "/" + this.dataObj.dir + "/" + file.name； 替换${filename}为真正的文件名
+      //   url: this.dataObj.host + "/" + this.dataObj.key.replace("${filename}",file.name)
+      // });
+      // this.emitInput(this.fileList);
     },
     handleExceed(files, fileList) {
       this.$message({

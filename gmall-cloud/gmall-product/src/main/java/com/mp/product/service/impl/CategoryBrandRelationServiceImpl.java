@@ -81,13 +81,10 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
     @Override
     public List<Brand> getBrandsByCatId(Long catId) {
 
-        List<CategoryBrandRelation> categoryId = relationMapper.selectList(new QueryWrapper<CategoryBrandRelation>().eq("category_id", catId));
-        List<Brand> collect = categoryId.stream().map(item -> {
-            Long brandId = item.getBrandId();
-            Brand byId = brandService.getById(brandId);
-            return byId;
-        }).collect(Collectors.toList());
-        return collect;
+        List<Long> brandIds = relationMapper.selectList(new QueryWrapper<CategoryBrandRelation>().eq("category_id", catId))
+                .stream().map(item -> item.getBrandId()).collect(Collectors.toList());
+        // todo: 如果brandIds 数量比较多,可以分组多查询几次
+        return brandService.listByIds(brandIds);
     }
 
     @Override

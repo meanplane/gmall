@@ -148,7 +148,7 @@ public class AttrServiceImpl extends ServiceImpl<AttrMapper, Attr> implements At
                 new QueryWrapper<AttrAttrgroupRelation>().eq("attr_group_id", attrgroupId));
         List<Long> attrIds = relations.stream().map(attr -> attr.getAttrId()).collect(Collectors.toList());
 
-        if (attrIds == null || attrIds.size() == 0) {
+        if (attrIds.size() == 0) {
             return null;
         }
         return this.listByIds(attrIds);
@@ -161,30 +161,24 @@ public class AttrServiceImpl extends ServiceImpl<AttrMapper, Attr> implements At
     public PageUtils getNoRelationAttr(Map<String, Object> params, Long attrgroupId) {
         //1、当前分组只能关联自己所属的分类里面的所有属性
         AttrGroup attrGroupEntity = attrGroupMapper.selectById(attrgroupId);
-        Long catelogId = attrGroupEntity.getCategoryId();
+        Long categoryId = attrGroupEntity.getCategoryId();
         //2、当前分组只能关联别的分组没有引用的属性
         //2.1)、当前分类下的其他分组
-        List<AttrGroup> group = attrGroupMapper.selectList(new QueryWrapper<AttrGroup>().eq("category_id", catelogId));
-        List<Long> collect = group.stream().map(item -> {
-            return item.getAttrGroupId();
-        }).collect(Collectors.toList());
+        List<AttrGroup> group = attrGroupMapper.selectList(new QueryWrapper<AttrGroup>().eq("category_id", categoryId));
+        List<Long> collect = group.stream().map(item -> item.getAttrGroupId()).collect(Collectors.toList());
 
         //2.2)、这些分组关联的属性
         List<AttrAttrgroupRelation> groupId = attrAttrgroupRelationMapper.selectList(new QueryWrapper<AttrAttrgroupRelation>().in("attr_group_id", collect));
-        List<Long> attrIds = groupId.stream().map(item -> {
-            return item.getAttrId();
-        }).collect(Collectors.toList());
+        List<Long> attrIds = groupId.stream().map(item -> item.getAttrId()).collect(Collectors.toList());
 
         //2.3)、从当前分类的所有属性中移除这些属性；
-        QueryWrapper<Attr> wrapper = new QueryWrapper<Attr>().eq("category_id", catelogId).eq("attr_type",ProductConst.AttrEnum.ATTR_TYPE_BASE.getCode());
-        if(attrIds!=null && attrIds.size()>0){
+        QueryWrapper<Attr> wrapper = new QueryWrapper<Attr>().eq("category_id", categoryId).eq("attr_type", ProductConst.AttrEnum.ATTR_TYPE_BASE.getCode());
+        if (attrIds != null && attrIds.size() > 0) {
             wrapper.notIn("attr_id", attrIds);
         }
         String key = (String) params.get("key");
-        if(!StringUtils.isEmpty(key)){
-            wrapper.and((w)->{
-                w.eq("attr_id",key).or().like("attr_name",key);
-            });
+        if (!StringUtils.isEmpty(key)) {
+            wrapper.and((w) -> w.eq("attr_id", key).or().like("attr_name", key));
         }
         IPage<Attr> page = this.page(new Query<Attr>().getPage(params), wrapper);
 
@@ -194,18 +188,26 @@ public class AttrServiceImpl extends ServiceImpl<AttrMapper, Attr> implements At
     }
 
     @Override
-    public void deleteRelation(AttrGroupRelationVo[] vos) {
+    public void deleteRelation(List<AttrGroupRelationVo> vos) {
 
+        QueryWrapper<AttrAttrgroupRelation> wrapper = new QueryWrapper<>();
+        for (AttrGroupRelationVo vo : vos) {
+            wrapper.or(w ->
+                    w.eq("attr_id", vo.getAttrId()).eq("attr_group_id", vo.getAttrGroupId())
+            );
+        }
+
+        attrAttrgroupRelationMapper.delete(wrapper);
     }
 
     @Transactional
     @Override
     public void updateAttr(AttrVo attr) {
         Attr attrEntity = new Attr();
-        BeanUtils.copyProperties(attr,attrEntity);
+        BeanUtils.copyProperties(attr, attrEntity);
         this.updateById(attrEntity);
 
-        if(attrEntity.getAttrType() == ProductConst.AttrEnum.ATTR_TYPE_BASE.getCode()){
+        if (attrEntity.getAttrType() == ProductConst.AttrEnum.ATTR_TYPE_BASE.getCode()) {
             //1、修改分组关联
             AttrAttrgroupRelation relationEntity = new AttrAttrgroupRelation();
 
@@ -213,11 +215,11 @@ public class AttrServiceImpl extends ServiceImpl<AttrMapper, Attr> implements At
             relationEntity.setAttrId(attr.getAttrId());
 
             Integer count = attrAttrgroupRelationMapper.selectCount(new QueryWrapper<AttrAttrgroupRelation>().eq("attr_id", attr.getAttrId()));
-            if(count>0){
+            if (count > 0) {
 
-                attrAttrgroupRelationMapper.update(relationEntity,new UpdateWrapper<AttrAttrgroupRelation>().eq("attr_id",attr.getAttrId()));
+                attrAttrgroupRelationMapper.update(relationEntity, new UpdateWrapper<AttrAttrgroupRelation>().eq("attr_id", attr.getAttrId()));
 
-            }else{
+            } else {
                 attrAttrgroupRelationMapper.insert(relationEntity);
             }
         }

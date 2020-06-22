@@ -15,6 +15,13 @@ spring:
           filters:
             - RewritePath=/admin/product/(?<segment>.*),/$\{segment}
 
+        - id: member_route
+          uri: lb://gmall-member
+          predicates:
+            - Path=/admin/member/**
+          filters:
+            - RewritePath=/admin/member/(?<segment>.*),/$\{segment}
+
         - id: admin_route
           uri: lb://gmall-admin
           predicates:
