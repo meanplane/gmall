@@ -36,7 +36,7 @@
           <br />
           商品描述：{{scope.row.skuDesc}}
           <br />
-          分类ID：{{scope.row.catalogId}}
+          分类ID：{{scope.row.categoryId}}
           <br />
           SpuID：{{scope.row.spuId}}
           <br />

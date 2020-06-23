@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 
 /**
  * sku信息
- * 
+ *
  * @author leifengyang
  * @email leifengyang@gmail.com
  * @date 2019-10-01 21:08:49
@@ -38,7 +38,7 @@ public class SkuInfo implements Serializable {
 	/**
 	 * 所属分类id
 	 */
-	private Long catalogId;
+	private Long categoryId;
 	/**
 	 * 品牌id
 	 */

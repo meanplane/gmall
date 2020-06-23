@@ -62,14 +62,13 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupMapper, AttrGroup
 
     /**
      * 根据分类id查出所有的分组以及这些组里面的属性
-     * @param catelogId
+     * @param categoryId
      * @return
      */
     @Override
-    public List<AttrGroupWithAttrsVo> getAttrGroupWithAttrsByCategoryId(Long catelogId) {
-        //com.atguigu.gulimall.product.vo
+    public List<AttrGroupWithAttrsVo> getAttrGroupWithAttrsByCategoryId(Long categoryId) {
         //1、查询分组信息
-        List<AttrGroup> attrGroupEntities = this.list(new QueryWrapper<AttrGroup>().eq("catelog_id", catelogId));
+        List<AttrGroup> attrGroupEntities = this.list(new QueryWrapper<AttrGroup>().eq("category_id", categoryId));
 
         //2、查询所有属性
         List<AttrGroupWithAttrsVo> collect = attrGroupEntities.stream().map(group -> {

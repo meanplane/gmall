@@ -92,7 +92,7 @@ public class AttrServiceImpl extends ServiceImpl<AttrMapper, Attr> implements At
                     attrRespVo.setGroupName(attrGroup.getAttrGroupName());
                 }
             }
-
+            // todo: 这里可以优化,查一次sql
             Category category = categoryMapper.selectById(attr.getCategoryId());
             if (category != null) {
                 attrRespVo.setCategoryName(category.getName());

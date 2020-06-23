@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  * spu信息
- * 
+ *
  * @author leifengyang
  * @email leifengyang@gmail.com
  * @date 2019-10-01 21:08:49
@@ -35,13 +35,13 @@ public class SpuInfo implements Serializable {
 	/**
 	 * 所属分类id
 	 */
-	private Long catalogId;
+	private Long categoryId;
 	/**
 	 * 品牌id
 	 */
 	private Long brandId;
 	/**
-	 * 
+	 *
 	 */
 	private BigDecimal weight;
 	/**
@@ -49,11 +49,11 @@ public class SpuInfo implements Serializable {
 	 */
 	private Integer publishStatus;
 	/**
-	 * 
+	 *
 	 */
 	private Date createTime;
 	/**
-	 * 
+	 *
 	 */
 	private Date updateTime;
 

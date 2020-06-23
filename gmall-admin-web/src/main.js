@@ -11,7 +11,10 @@ import httpRequest from '@/utils/httpRequest' // api: https://github.com/axios/a
 import { isAuth } from '@/utils'
 import cloneDeep from 'lodash/cloneDeep'
 import PubSub from 'pubsub-js'
+import {Divider} from 'element-ui'
 
+
+Vue.use(Divider)
 Vue.use(VueCookie)
 Vue.config.productionTip = false
 

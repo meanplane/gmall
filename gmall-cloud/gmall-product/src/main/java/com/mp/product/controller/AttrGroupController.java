@@ -43,9 +43,9 @@ public class AttrGroupController {
         return R.ok();
     }
 
-    ///product/attrgroup/{catelogId}/withattr
-    @GetMapping("/{catelogId}/withattr")
-    public R getAttrGroupWithAttrs(@PathVariable("catelogId")Long catelogId){
+    //product/attrgroup/{categoryId}/withattr
+    @GetMapping("/{categoryId}/withattr")
+    public R getAttrGroupWithAttrs(@PathVariable("categoryId")Long catelogId){
 
         //1、查出当前分类下的所有属性分组，
         //2、查出每个属性分组的所有属性
