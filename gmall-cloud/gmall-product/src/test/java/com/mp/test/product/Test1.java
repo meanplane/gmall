@@ -41,7 +41,8 @@ public class Test1 {
 
     @Test
     public void testRedis1() {
-        redisUtils.del("awskey");
+        Object awskey = redisUtils.get("awskey");
+        System.out.println(awskey);
     }
 
     @Test

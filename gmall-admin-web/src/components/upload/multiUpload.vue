@@ -107,6 +107,7 @@ export default {
     },
     httpRequest({file}) {
       getSecret().then(response => {
+        console.log('resp',response)
         let accessKey = response.accessKey;
         let secretKey = response.secretKey;
         uploadFile(file, secretKey, accessKey).then(res => {

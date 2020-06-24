@@ -130,17 +130,17 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoMapper, SpuInfo> impl
                         defaultImg = image.getImgUrl();
                     }
                 }
-                //    private String skuName;
-                //    private BigDecimal price;
-                //    private String skuTitle;
-                //    private String skuSubtitle;
                 SkuInfo skuInfoEntity = new SkuInfo();
                 BeanUtils.copyProperties(item,skuInfoEntity);
-                skuInfoEntity.setBrandId(infoEntity.getBrandId());
-                skuInfoEntity.setCategoryId(infoEntity.getCategoryId());
-                skuInfoEntity.setSaleCount(0L);
                 skuInfoEntity.setSpuId(infoEntity.getId());
+                skuInfoEntity.setSkuName(item.getSkuName());
+                skuInfoEntity.setCategoryId(infoEntity.getCategoryId());
+                skuInfoEntity.setBrandId(infoEntity.getBrandId());
                 skuInfoEntity.setSkuDefaultImg(defaultImg);
+                skuInfoEntity.setSkuTitle(item.getSkuTitle());
+                skuInfoEntity.setSkuSubtitle(item.getSkuSubtitle());
+                skuInfoEntity.setPrice(item.getPrice());
+                skuInfoEntity.setSaleCount(0L);
                 //5.1）、sku的基本信息；pms_sku_info
                 skuInfoService.saveSkuInfo(skuInfoEntity);
 
@@ -181,8 +181,6 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoMapper, SpuInfo> impl
                         log.error("远程保存sku优惠信息失败");
                     }
                 }
-
-
 
             });
         }
