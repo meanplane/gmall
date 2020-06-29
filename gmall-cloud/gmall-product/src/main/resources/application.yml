@@ -20,6 +20,7 @@ spring:
 
 
 
+
 mybatis-plus:
   global-config:
     db-config:
@@ -30,3 +31,15 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 server:
   port: 10000
+fdfs:
+  connect-timeout: 6000
+  so-timeout: 1500
+  tracker-list:
+    - static.otcrmbt.com:22122
+  pool:
+    #从池中借出的对象的最大数目
+    max-total: 153
+    max-wait-millis: 102
+    jmx-name-base: 1
+    jmx-name-prefix: 1
+  web-server-url: http://static.otcrmbt.com:18080/

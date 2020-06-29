@@ -1,5 +1,6 @@
 package com.mp.test.product;
 
+import com.github.tobato.fastdfs.service.FastFileStorageClient;
 import com.mp.product.ProductApp;
 import com.mp.product.service.BrandService;
 import com.mp.product.service.CategoryBrandRelationService;
@@ -33,6 +34,11 @@ public class Test1 {
     @Autowired
     private CategoryBrandRelationService categoryBrandRelationService;
 
+    @Autowired
+    private FastFileStorageClient fastFileStorageClient;
+
+    public static final String DEFAULT_CHARSET = "UTF-8";
+
     @Test
     public void testRedis() throws Exception {
         Map<String, Object> stsToken = awsService.getStsToken("1000010", 21600L);
@@ -47,6 +53,11 @@ public class Test1 {
 
     @Test
     public void testSql() {
+
+    }
+
+    @Test
+    public void testUpload(){
 
     }
 }

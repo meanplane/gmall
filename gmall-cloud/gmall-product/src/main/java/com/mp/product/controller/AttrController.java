@@ -22,8 +22,8 @@ public class AttrController {
     @Autowired
     private AttrService attrService;
 
-    //product/attr/sale/list/0?
-    ///product/attr/base/list/{categoryId}
+    //销售属性 product/attr/sale/list/0?
+    //基本属性 product/attr/base/list/{categoryId}
     @GetMapping("/{attrType}/list/{categoryId}")
     public R baseAttrList(@RequestParam Map<String, Object> params,
                           @PathVariable("categoryId") Long categoryId,

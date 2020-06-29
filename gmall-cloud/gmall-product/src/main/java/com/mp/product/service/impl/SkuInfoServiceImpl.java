@@ -38,7 +38,7 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo> impl
         QueryWrapper<SkuInfo> queryWrapper = new QueryWrapper<>();
         /**
          * key:
-         * catelogId: 0
+         * categoryId: 0
          * brandId: 0
          * min: 0
          * max: 0
@@ -50,14 +50,14 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo> impl
             });
         }
 
-        String catelogId = (String) params.get("catelogId");
-        if(!StringUtils.isEmpty(catelogId)&&!"0".equalsIgnoreCase(catelogId)){
+        String categoryId = (String) params.get("categoryId");
+        if(!StringUtils.isEmpty(categoryId)&&!"0".equalsIgnoreCase(categoryId)){
 
-            queryWrapper.eq("catalog_id",catelogId);
+            queryWrapper.eq("category_id",categoryId);
         }
 
         String brandId = (String) params.get("brandId");
-        if(!StringUtils.isEmpty(brandId)&&!"0".equalsIgnoreCase(catelogId)){
+        if(!StringUtils.isEmpty(brandId)&&!"0".equalsIgnoreCase(categoryId)){
             queryWrapper.eq("brand_id",brandId);
         }
 

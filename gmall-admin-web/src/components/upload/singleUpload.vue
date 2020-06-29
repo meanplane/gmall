@@ -1,8 +1,7 @@
 <template> 
   <div>
     <el-upload
-      action="http://gulimall-hello.oss-cn-beijing.aliyuncs.com"
-      :http-request="httpRequest"
+      action="http://localhost:88/admin/product/aws/imgUpload"
       :data="dataObj"
       list-type="picture"
       :multiple="false" :show-file-list="showFileList"
@@ -20,7 +19,6 @@
   </div>
 </template>
 <script>
-  import { getSecret, uploadFile} from './policy'
   import {getUUID} from '@/utils'
 
   export default {
@@ -86,31 +84,11 @@
         this.fileList.pop()
         this.fileList.push({
           name: file.name,
-          url: this.dataObj.host + '/' + this.dataObj.key.replace('${filename}', file.name)
+          url: res.data
         })
         this.emitInput(this.fileList[0].url)
       },
-      httpRequest({file}) {
-        getSecret().then(response => {
-          let accessKey = response.accessKey;
-          let secretKey = response.secretKey;
-          uploadFile(file, secretKey, accessKey).then(res => {
-            // 上传成功
-            console.log('上传成功...')
-            this.showFileList = true
-            this.fileList.pop()
-            this.fileList.push({
-              name: res.key,
-              url: res.Location
-            })
-            this.emitInput(this.fileList[0].url)
-          }).catch(err => {
-            console.log(err)
-          })
-        }).catch( err => {
-          console.log(err)
-        })
-      }
+
     }
   }
 </script>
