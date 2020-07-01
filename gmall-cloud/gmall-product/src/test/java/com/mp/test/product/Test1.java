@@ -1,7 +1,9 @@
 package com.mp.test.product;
 
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
+import com.mp.common.bean.product.Attr;
 import com.mp.product.ProductApp;
+import com.mp.product.service.AttrService;
 import com.mp.product.service.BrandService;
 import com.mp.product.service.CategoryBrandRelationService;
 import com.mp.product.service.impl.AwsServiceImpl;
@@ -12,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,6 +34,9 @@ public class Test1 {
 
     @Autowired
     private RedisUtils redisUtils;
+
+    @Autowired
+    private AttrService attrService;
 
     @Autowired
     private CategoryBrandRelationService categoryBrandRelationService;
@@ -53,11 +60,14 @@ public class Test1 {
 
     @Test
     public void testSql() {
-
-    }
-
-    @Test
-    public void testUpload(){
-
+        ArrayList<Long> ids = new ArrayList<>();
+        ids.add(2L);
+        ids.add(3L);
+        ids.add(5L);
+        ids.add(6L);
+        List<Attr> attrs = attrService.selectSearchAttrs(ids);
+        for (Attr attr : attrs) {
+            System.out.println(attr);
+        }
     }
 }

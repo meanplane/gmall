@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 
@@ -88,6 +89,14 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo> impl
         );
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public List<SkuInfo> getSkusBySpuId(Long spuId) {
+        QueryWrapper<SkuInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("spu_id",spuId);
+
+        return baseMapper.selectList(queryWrapper);
     }
 
 }

@@ -188,6 +188,14 @@ public class AttrServiceImpl extends ServiceImpl<AttrMapper, Attr> implements At
     }
 
     @Override
+    public List<Attr> selectSearchAttrs(List<Long> attrIds) {
+        QueryWrapper<Attr> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("search_type",1);
+        queryWrapper.in("attr_id",attrIds);
+        return baseMapper.selectList(queryWrapper);
+    }
+
+    @Override
     public void deleteRelation(List<AttrGroupRelationVo> vos) {
 
         QueryWrapper<AttrAttrgroupRelation> wrapper = new QueryWrapper<>();

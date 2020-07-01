@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: gmall-search
+  cloud:
+    nacos:
+      discovery:
+        server-addr: mplane.cn:8848
+
+server:
+  port: 12000
