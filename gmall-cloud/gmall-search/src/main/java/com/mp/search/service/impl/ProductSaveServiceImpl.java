@@ -44,6 +44,7 @@ public class ProductSaveServiceImpl implements ProductSaveService {
 
         BulkResponse bulk = restClient.bulk(bulkRequest, ESconfig.COMMON_POTIONS);
 
+
         // todo 处理错误
 //        boolean b = bulk.hasFailures();
     }

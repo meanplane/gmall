@@ -33,13 +33,13 @@ public class PurchaseServiceImpl extends ServiceImpl<PurchaseMapper, Purchase> i
     private PurchaseDetailService purchaseDetailService;
 
     @Autowired
-    WareSkuService wareSkuService;
+    private WareSkuService wareSkuService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<Purchase> page = this.page(
                 new Query<Purchase>().getPage(params),
-                new QueryWrapper<Purchase>()
+                new QueryWrapper<>()
         );
 
         return new PageUtils(page);

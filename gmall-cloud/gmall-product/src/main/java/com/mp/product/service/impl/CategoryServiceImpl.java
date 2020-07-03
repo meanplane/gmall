@@ -1,17 +1,21 @@
 package com.mp.product.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mp.common.bean.product.Category;
 import com.mp.product.mapper.CategoryMapper;
 import com.mp.product.service.CategoryBrandRelationService;
 import com.mp.product.service.CategoryService;
+import com.mp.product.vo.Catelog2VO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -79,6 +83,42 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     public void removeCascade(List<Long> asList) {
         this.removeByIds(asList);
         categoryBrandRelationService.deleteCategory(asList);
+    }
+
+    @Override
+    public List<Category> getLevel1Categories() {
+        return baseMapper.selectList(new QueryWrapper<Category>().eq("parent_cid", 0));
+    }
+
+    @Override
+    public Map<String, List<Catelog2VO>> getCatalogJson() throws InterruptedException {
+        List<Category> selectList = baseMapper.selectList(null);
+        List<Category> level1Categories = getParent_cid(selectList, 0L);
+
+        Map<String, List<Catelog2VO>> parentCid = level1Categories.stream().collect(Collectors.toMap(k -> k.getCatId().toString(), v -> {
+            List<Category> categoryEntities = getParent_cid(selectList, v.getCatId());
+            List<Catelog2VO> catelog2VOS = null;
+            if (!CollectionUtils.isEmpty(categoryEntities)) {
+                catelog2VOS = categoryEntities.stream().map(l2 -> {
+                    Catelog2VO catelog2VO = new Catelog2VO(v.getCatId().toString(), null, l2.getCatId().toString(), l2.getName());
+                    List<Category> level3Catalog = getParent_cid(selectList, l2.getCatId());
+                    if (!CollectionUtils.isEmpty(level3Catalog)) {
+                        List<Catelog2VO.Catelog3VO> collect = level3Catalog.stream().map(l3 -> {
+                            Catelog2VO.Catelog3VO catelog3VO = new Catelog2VO.Catelog3VO(l2.getCatId().toString(), l3.getCatId().toString(), l3.getName());
+                            return catelog3VO;
+                        }).collect(Collectors.toList());
+                        catelog2VO.setCatalog3List(collect);
+                    }
+                    return catelog2VO;
+                }).collect(Collectors.toList());
+            }
+            return catelog2VOS;
+        }));
+        return parentCid;
+    }
+
+    private List<Category> getParent_cid(List<Category> selectList, Long parentCid) {
+        return selectList.stream().filter(o -> o.getParentCid().equals(parentCid)).collect(Collectors.toList());
     }
 
     //225,25,2

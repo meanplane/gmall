@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mp.common.bean.ware.WareSku;
+import com.mp.common.bean.ware.vo.SkuHasStockVo;
 import com.mp.common.utils.PageUtils;
 import com.mp.common.utils.Query;
 import com.mp.common.utils.R;
@@ -17,7 +18,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
-
+import java.util.stream.Collectors;
 
 
 @Service("wareSkuService")
@@ -85,6 +86,24 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuMapper, WareSku> impl
             wareSkuMapper.addStock(skuId,wareId,skuNum);
         }
 
+    }
+
+    @Override
+    public List<SkuHasStockVo> getSkuHasStock(List<Long> skuIds) {
+        // 查询库存不为0 的商品
+        QueryWrapper<WareSku> q = new QueryWrapper<>();
+        q.in("sku_id",skuIds);
+        q.gt("stock",0);
+
+        List<WareSku> hasList = baseMapper.selectList(q);
+        List<SkuHasStockVo> collect = skuIds.stream().map(skuId -> {
+            SkuHasStockVo vo = new SkuHasStockVo();
+            vo.setSkuId(skuId);
+            vo.setHasStock(hasList.contains(skuId));
+            return vo;
+        }).collect(Collectors.toList());
+
+        return collect;
     }
 
 }

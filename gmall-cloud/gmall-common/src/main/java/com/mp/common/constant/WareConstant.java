@@ -1,10 +1,13 @@
 package com.mp.common.constant;
 
+import lombok.Getter;
+
 /**
  * Author: Xiaoer
  * Date: 2020-06-29
  */
 public class WareConstant {
+    @Getter
     public enum  PurchaseStatusEnum{
         CREATED(0,"新建"),ASSIGNED(1,"已分配"),
         RECEIVE(2,"已领取"),FINISH(3,"已完成"),
@@ -16,17 +19,9 @@ public class WareConstant {
             this.code = code;
             this.msg = msg;
         }
-
-        public int getCode() {
-            return code;
-        }
-
-        public String getMsg() {
-            return msg;
-        }
     }
 
-
+    @Getter
     public enum  PurchaseDetailStatusEnum{
         CREATED(0,"新建"),ASSIGNED(1,"已分配"),
         BUYING(2,"正在采购"),FINISH(3,"已完成"),
@@ -37,14 +32,6 @@ public class WareConstant {
         PurchaseDetailStatusEnum(int code,String msg){
             this.code = code;
             this.msg = msg;
-        }
-
-        public int getCode() {
-            return code;
-        }
-
-        public String getMsg() {
-            return msg;
         }
     }
 }

@@ -1,15 +1,19 @@
 package com.mp.product.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mp.common.bean.product.*;
 import com.mp.common.bean.to.to.SkuEsModel;
+import com.mp.common.bean.ware.vo.SkuHasStockVo;
+import com.mp.common.constant.ProductConst;
 import com.mp.common.utils.PageUtils;
 import com.mp.common.utils.Query;
 import com.mp.common.utils.R;
 import com.mp.product.feign.CouponFeignService;
 import com.mp.product.feign.SearchFeignService;
+import com.mp.product.feign.WareFeignService;
 import com.mp.product.mapper.SpuInfoMapper;
 import com.mp.product.service.*;
 import com.mp.product.vo.spu.BaseAttrs;
@@ -23,6 +27,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -65,6 +70,9 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoMapper, SpuInfo> impl
 
     @Autowired
     private SearchFeignService searchFeignService;
+
+    @Autowired
+    private WareFeignService wareFeignService;
 
 
 
@@ -223,16 +231,16 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoMapper, SpuInfo> impl
             wrapper.eq("brand_id",brandId);
         }
 
-        String catelogId = (String) params.get("catelogId");
-        if(!StringUtils.isEmpty(catelogId)&&!"0".equalsIgnoreCase(catelogId)){
-            wrapper.eq("catalog_id",catelogId);
+        String categoryId = (String) params.get("categoryId");
+        if(!StringUtils.isEmpty(categoryId)&&!"0".equalsIgnoreCase(categoryId)){
+            wrapper.eq("category_id",categoryId);
         }
 
         /**
          * status: 2
          * key:
          * brandId: 9
-         * catelogId: 225
+         * categoryId: 225
          */
 
         IPage<SpuInfo> page = this.page(
@@ -247,6 +255,7 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoMapper, SpuInfo> impl
     public void up(Long spuId) {
         // 1.查出当前spuid 对应的所有sku信息, 品牌的名字
         List<SkuInfo> skus = skuInfoService.getSkusBySpuId(spuId);
+        List<Long> skuIdLists = skus.stream().map(SkuInfo::getSkuId).collect(Collectors.toList());
 
         // 4 查询当前 sku 的所有可以被用来检索的规格属性
         List<ProductAttrValue> baseAttrs = productAttrValueService.baseAttrlistforspu(spuId);
@@ -262,6 +271,21 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoMapper, SpuInfo> impl
                 })
                 .collect(Collectors.toList());
 
+        // todo 发送远程调用 在仓库中查询是否有库存
+        Map<Long, Boolean> stockMap = new HashMap<>();
+        try {
+            R r = wareFeignService.getSkusHasStock(skuIdLists);
+            Object data = r.get("data");
+
+            List<SkuHasStockVo> lists = JSON.parseArray((String) data, SkuHasStockVo.class);
+            lists.stream().forEach(item -> stockMap.put(item.getSkuId(),item.getHasStock()));
+
+//            TypeReference<List<SkuHasStockVo>> typeReference = new TypeReference<List<SkuHasStockVo>>() {};
+//            stockMap = r.getData(typeReference).stream().collect(Collectors.toMap(SkuHasStockVo::getSkuId, SkuHasStockVo::getHasStock));
+        } catch (Exception e) {
+            log.error("库存服务查询异常，原因：", e);
+        }
+
 
         // 2.封装每个sku信息
         List<SkuEsModel> upProducts = skus.stream().map(sku -> {
@@ -272,10 +296,15 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoMapper, SpuInfo> impl
             skuEsModel.setSkuPrice(sku.getPrice());
             skuEsModel.setSkuImg(sku.getSkuDefaultImg());
 
-            //hasStock,hotScore
-            // todo 1 发送远程调用,查库存
+            // todo 设置库存信息
+            if (stockMap == null) {
+                skuEsModel.setHasStock(true);
+            } else {
+                skuEsModel.setHasStock(stockMap.get(sku.getSkuId()));
+            }
             // todo 2 发送远程调用,热度评分
             skuEsModel.setHotScore(0L);
+
             // todo 3 查询品牌和分类的名字
             Category category = categoryService.getById(sku.getCategoryId());
             skuEsModel.setCategoryName(category.getName());
@@ -296,9 +325,12 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoMapper, SpuInfo> impl
         if(r.getCode() == 0){
             // 远程调用成功
             // todo 6 修改当前spu的状态
+            baseMapper.updateSpuStatus(spuId, ProductConst.StatusEnum.SPU_UP.getCode());
         }else{
             // 调用失败
             // todo 7 重复调用 ? 接口幂等性
         }
     }
 }
+
+

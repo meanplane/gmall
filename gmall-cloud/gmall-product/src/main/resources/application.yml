@@ -16,6 +16,8 @@ spring:
     database: 0
     port: 6379
     password: xxx123
+  thymeleaf:
+    cache: false
 
 
 

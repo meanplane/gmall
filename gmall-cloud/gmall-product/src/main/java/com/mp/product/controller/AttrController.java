@@ -4,6 +4,7 @@ import com.mp.common.bean.product.ProductAttrValue;
 import com.mp.common.utils.PageUtils;
 import com.mp.common.utils.R;
 import com.mp.product.service.AttrService;
+import com.mp.product.service.ProductAttrValueService;
 import com.mp.product.vo.AttrRespVo;
 import com.mp.product.vo.AttrVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,18 @@ import java.util.Map;
 public class AttrController {
     @Autowired
     private AttrService attrService;
+
+    @Autowired
+    private ProductAttrValueService productAttrValueService;
+
+    // /product/attr/base/listforspu/{spuId}
+    @GetMapping("/base/listforspu/{spuId}")
+    public R baseAttrlistforspu(@PathVariable("spuId") Long spuId) {
+
+        List<ProductAttrValue> entities = productAttrValueService.baseAttrlistforspu(spuId);
+
+        return R.ok().put("data", entities);
+    }
 
     //销售属性 product/attr/sale/list/0?
     //基本属性 product/attr/base/list/{categoryId}
