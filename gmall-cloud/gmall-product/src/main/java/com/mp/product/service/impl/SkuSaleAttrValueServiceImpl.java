@@ -8,8 +8,10 @@ import com.mp.common.utils.PageUtils;
 import com.mp.common.utils.Query;
 import com.mp.product.mapper.SkuSaleAttrValueMapper;
 import com.mp.product.service.SkuSaleAttrValueService;
+import com.mp.product.vo.SkuItemSaleAttrVO;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -24,6 +26,16 @@ public class SkuSaleAttrValueServiceImpl extends ServiceImpl<SkuSaleAttrValueMap
         );
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public List<SkuItemSaleAttrVO> getSaleAttrsBySpuId(Long spuId) {
+        return this.baseMapper.getSaleAttrsBySpuId(spuId);
+    }
+
+    @Override
+    public List<String> getSkuSaleAttrValuesAsStringList(Long skuId) {
+        return this.baseMapper.getSkuSaleAttrValuesAsStringList(skuId);
     }
 
 }

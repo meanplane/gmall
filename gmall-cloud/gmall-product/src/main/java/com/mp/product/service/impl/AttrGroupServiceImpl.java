@@ -11,6 +11,7 @@ import com.mp.product.mapper.AttrGroupMapper;
 import com.mp.product.service.AttrGroupService;
 import com.mp.product.service.AttrService;
 import com.mp.product.vo.AttrGroupWithAttrsVo;
+import com.mp.product.vo.SpuItemAttrGroupVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -82,5 +83,10 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupMapper, AttrGroup
         return collect;
 
 
+    }
+
+    @Override
+    public List<SpuItemAttrGroupVO> getAttrGroupWithAttrsBySpuIdAndCatalogId(Long spuId, Long catalogId) {
+        return this.baseMapper.getAttrGroupWithAttrsBySpuIdAndCatalogId(spuId, catalogId);
     }
 }

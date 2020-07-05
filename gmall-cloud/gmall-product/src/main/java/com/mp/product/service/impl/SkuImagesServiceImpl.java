@@ -10,6 +10,7 @@ import com.mp.product.mapper.SkuImagesMapper;
 import com.mp.product.service.SkuImagesService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -26,4 +27,8 @@ public class SkuImagesServiceImpl extends ServiceImpl<SkuImagesMapper, SkuImages
         return new PageUtils(page);
     }
 
+    @Override
+    public List<SkuImages> getImagesBySkuId(Long skuId) {
+        return this.baseMapper.selectList(new QueryWrapper<SkuImages>().eq("sku_id", skuId));
+    }
 }

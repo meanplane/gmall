@@ -6,8 +6,6 @@ import com.mp.product.ProductApp;
 import com.mp.product.service.AttrService;
 import com.mp.product.service.BrandService;
 import com.mp.product.service.CategoryBrandRelationService;
-import com.mp.product.service.impl.AwsServiceImpl;
-import com.mp.product.utils.RedisUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +28,6 @@ public class Test1 {
     private BrandService brandService;
 
     @Autowired
-    private AwsServiceImpl awsService;
-
-    @Autowired
-    private RedisUtils redisUtils;
-
-    @Autowired
     private AttrService attrService;
 
     @Autowired
@@ -46,17 +38,6 @@ public class Test1 {
 
     public static final String DEFAULT_CHARSET = "UTF-8";
 
-    @Test
-    public void testRedis() throws Exception {
-        Map<String, Object> stsToken = awsService.getStsToken("1000010", 21600L);
-        System.out.println(stsToken);
-    }
-
-    @Test
-    public void testRedis1() {
-        Object awskey = redisUtils.get("awskey");
-        System.out.println(awskey);
-    }
 
     @Test
     public void testSql() {
