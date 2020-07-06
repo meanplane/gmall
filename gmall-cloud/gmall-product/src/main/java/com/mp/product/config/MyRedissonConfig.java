@@ -17,7 +17,8 @@ public class MyRedissonConfig {
         // RedissonClient redisson = Redisson.create();
 
         Config config = new Config();
-        config.useSingleServer().setAddress("redis://127.0.0.1:6379");
+        config.useSingleServer().setAddress("redis://mplane.cn:6379");
+        config.useSingleServer().setPassword("xxx123");
         RedissonClient redisson = Redisson.create(config);
         return redisson;
     }

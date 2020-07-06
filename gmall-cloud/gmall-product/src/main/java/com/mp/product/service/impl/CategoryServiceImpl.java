@@ -8,6 +8,7 @@ import com.mp.product.service.CategoryBrandRelationService;
 import com.mp.product.service.CategoryService;
 import com.mp.product.vo.Catelog2VO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -90,6 +91,8 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         return baseMapper.selectList(new QueryWrapper<Category>().eq("parent_cid", 0));
     }
 
+
+    @Cacheable(value = {"category"}, key = "#root.methodName")
     @Override
     public Map<String, List<Catelog2VO>> getCatalogJson() throws InterruptedException {
         List<Category> selectList = baseMapper.selectList(null);

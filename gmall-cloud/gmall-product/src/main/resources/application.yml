@@ -18,6 +18,12 @@ spring:
     password: xxx123
   thymeleaf:
     cache: false
+  cache:
+    type: redis
+    redis:
+      time-to-live: 3600000
+      use-key-prefix: true
+      cache-null-values: true
 
 mall:
   threads:

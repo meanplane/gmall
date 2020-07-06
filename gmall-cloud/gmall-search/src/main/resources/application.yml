@@ -5,6 +5,7 @@ spring:
     nacos:
       discovery:
         server-addr: mplane.cn:8848
-
+  thymeleaf:
+    cache: false
 server:
   port: 12000
