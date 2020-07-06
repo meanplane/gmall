@@ -43,7 +43,7 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 server:
-  port: 10000
+  port: 10001
 fdfs:
   connect-timeout: 6000
   so-timeout: 1500
