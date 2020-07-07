@@ -21,5 +21,5 @@ public interface AttrGroupService extends IService<AttrGroup> {
 
     List<AttrGroupWithAttrsVo> getAttrGroupWithAttrsByCategoryId(Long categoryId);
 
-    List<SpuItemAttrGroupVO> getAttrGroupWithAttrsBySpuIdAndCatalogId(Long spuId, Long catalogId);
+    List<SpuItemAttrGroupVO> getAttrGroupWithAttrsBySpuIdAndCategoryId(Long spuId, Long categoryId);
 }

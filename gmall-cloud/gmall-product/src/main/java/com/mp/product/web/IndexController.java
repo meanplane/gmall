@@ -2,7 +2,7 @@ package com.mp.product.web;
 
 import com.mp.common.bean.product.Category;
 import com.mp.product.service.CategoryService;
-import com.mp.product.vo.Catelog2VO;
+import com.mp.product.vo.Category2VO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +32,8 @@ public class IndexController {
     }
 
     @ResponseBody
-    @GetMapping("/index/catalog.json")
-    public Map<String, List<Catelog2VO>> getCatalogJson() throws InterruptedException {
-        return categoryService.getCatalogJson();
+    @GetMapping("/index/category.json")
+    public Map<String, List<Category2VO>> getCategoryJson() throws InterruptedException {
+        return categoryService.getCategoryJson();
     }
 }

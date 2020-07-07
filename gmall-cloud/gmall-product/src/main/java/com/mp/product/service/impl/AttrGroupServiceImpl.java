@@ -86,7 +86,7 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupMapper, AttrGroup
     }
 
     @Override
-    public List<SpuItemAttrGroupVO> getAttrGroupWithAttrsBySpuIdAndCatalogId(Long spuId, Long catalogId) {
-        return this.baseMapper.getAttrGroupWithAttrsBySpuIdAndCatalogId(spuId, catalogId);
+    public List<SpuItemAttrGroupVO> getAttrGroupWithAttrsBySpuIdAndCategoryId(Long spuId, Long categoryId) {
+        return this.baseMapper.getAttrGroupWithAttrsBySpuIdAndCategoryId(spuId, categoryId);
     }
 }

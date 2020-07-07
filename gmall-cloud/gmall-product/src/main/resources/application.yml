@@ -40,8 +40,8 @@ mybatis-plus:
       id-type: auto
       logic-delete-value: 0
       logic-not-delete-value: 1
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 server:
   port: 10001
 fdfs:

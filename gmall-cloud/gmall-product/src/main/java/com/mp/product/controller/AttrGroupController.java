@@ -45,11 +45,11 @@ public class AttrGroupController {
 
     //product/attrgroup/{categoryId}/withattr
     @GetMapping("/{categoryId}/withattr")
-    public R getAttrGroupWithAttrs(@PathVariable("categoryId")Long catelogId){
+    public R getAttrGroupWithAttrs(@PathVariable("categoryId")Long categoryId){
 
         //1、查出当前分类下的所有属性分组，
         //2、查出每个属性分组的所有属性
-        List<AttrGroupWithAttrsVo> vos =  attrGroupService.getAttrGroupWithAttrsByCategoryId(catelogId);
+        List<AttrGroupWithAttrsVo> vos =  attrGroupService.getAttrGroupWithAttrsByCategoryId(categoryId);
         return R.ok().put("data",vos);
     }
 

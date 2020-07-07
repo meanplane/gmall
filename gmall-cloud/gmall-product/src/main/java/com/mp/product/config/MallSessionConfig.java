@@ -13,7 +13,7 @@ public class MallSessionConfig {
     @Bean
     public CookieSerializer cookieSerializer() {
         DefaultCookieSerializer cookieSerializer = new DefaultCookieSerializer();
-        cookieSerializer.setDomainName("catmall.com");
+        cookieSerializer.setDomainName("gmall.com");
         cookieSerializer.setCookieName("MALLSESSION");
         return cookieSerializer;
     }

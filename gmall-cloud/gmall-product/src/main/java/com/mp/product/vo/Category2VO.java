@@ -13,11 +13,11 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Catelog2VO {
+public class Category2VO {
 
-    private String catalogId;
+    private String categoryId;
 
-    private List<Catelog3VO> catalog3List;
+    private List<Category3VO> category3List;
 
     private String id;
 
@@ -26,9 +26,9 @@ public class Catelog2VO {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class Catelog3VO {
+    public static class Category3VO {
 
-        private String catalog2Id;
+        private String category2Id;
 
         private String id;
 

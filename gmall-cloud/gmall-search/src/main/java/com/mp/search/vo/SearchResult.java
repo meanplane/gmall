@@ -67,10 +67,10 @@ public class SearchResult {
      * 分类信息
      * 当前查询到的结果 所有涉及到的分类
      */
-    private List<CatalogVO> categories;
+    private List<CategoryVO> categories;
 
     @Data
-    public static class CatalogVO {
+    public static class CategoryVO {
 
         private Long categoryId;
 

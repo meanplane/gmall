@@ -18,7 +18,7 @@ public class SkuItemVo {
 
     private List<SkuItemSaleAttrVO> saleAttr;
 
-    private SpuInfoDesc desp;
+    private SpuInfoDesc desc;
 
     private List<SpuItemAttrGroupVO> groupAttrs;
 

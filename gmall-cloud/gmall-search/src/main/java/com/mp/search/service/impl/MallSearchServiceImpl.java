@@ -89,8 +89,8 @@ public class MallSearchServiceImpl implements MallSearchService {
         }
 
         // 1.2 bool-filter
-        if (!ObjectUtils.isEmpty(param.getCatalog3Id())) {
-            boolQueryBuilder.filter(QueryBuilders.termQuery("categoryId", param.getCatalog3Id()));
+        if (!ObjectUtils.isEmpty(param.getCategory3Id())) {
+            boolQueryBuilder.filter(QueryBuilders.termQuery("categoryId", param.getCategory3Id()));
         }
 
         if (!CollectionUtils.isEmpty(param.getBrandId()) && param.getBrandId().size() > 0) {
@@ -167,9 +167,9 @@ public class MallSearchServiceImpl implements MallSearchService {
         sourceBuilder.aggregation(brand_agg);
 
         // 分类聚合
-        TermsAggregationBuilder catalog_agg = AggregationBuilders.terms("catalog_agg").field("categoryId").size(20);
-        catalog_agg.subAggregation(AggregationBuilders.terms("catalog_name_agg").field("categoryName").size(1));
-        sourceBuilder.aggregation(catalog_agg);
+        TermsAggregationBuilder category_agg = AggregationBuilders.terms("category_agg").field("categoryId").size(20);
+        category_agg.subAggregation(AggregationBuilders.terms("category_name_agg").field("categoryName").size(1));
+        sourceBuilder.aggregation(category_agg);
 
         // 属性聚合
         NestedAggregationBuilder attr_agg = AggregationBuilders.nested("attr_agg", "attrs");
@@ -242,22 +242,22 @@ public class MallSearchServiceImpl implements MallSearchService {
         result.setBrands(brandVOS);
 
         // 设置分类聚合信息
-        ParsedLongTerms catalog_agg = response.getAggregations().get("catalog_agg");
-        List<SearchResult.CatalogVO> catalogVOS = new ArrayList<>();
-        List<? extends Terms.Bucket> buckets = catalog_agg.getBuckets();
+        ParsedLongTerms category_agg = response.getAggregations().get("category_agg");
+        List<SearchResult.CategoryVO> categoryVOS = new ArrayList<>();
+        List<? extends Terms.Bucket> buckets = category_agg.getBuckets();
         for (Terms.Bucket bucket : buckets) {
-            SearchResult.CatalogVO catalogVO = new SearchResult.CatalogVO();
+            SearchResult.CategoryVO categoryVO = new SearchResult.CategoryVO();
             // 获取分类 id
-            String catalogIdString = bucket.getKeyAsString();
-            catalogVO.setCategoryId(Long.parseLong(catalogIdString));
+            String categoryIdString = bucket.getKeyAsString();
+            categoryVO.setCategoryId(Long.parseLong(categoryIdString));
 
             // 获取分类名
-            ParsedStringTerms catalog_name_agg = bucket.getAggregations().get("catalog_name_agg");
-            String catalogNameString = catalog_name_agg.getBuckets().get(0).getKeyAsString();
-            catalogVO.setCategoryName(catalogNameString);
-            catalogVOS.add(catalogVO);
+            ParsedStringTerms category_name_agg = bucket.getAggregations().get("category_name_agg");
+            String categoryNameString = category_name_agg.getBuckets().get(0).getKeyAsString();
+            categoryVO.setCategoryName(categoryNameString);
+            categoryVOS.add(categoryVO);
         }
-        result.setCategories(catalogVOS);
+        result.setCategories(categoryVOS);
 
         // 设置分页信息
         result.setPageNum(searchParam.getPageNum());

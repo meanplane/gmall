@@ -6,7 +6,7 @@ import com.mp.common.bean.product.Category;
 import com.mp.product.mapper.CategoryMapper;
 import com.mp.product.service.CategoryBrandRelationService;
 import com.mp.product.service.CategoryService;
-import com.mp.product.vo.Catelog2VO;
+import com.mp.product.vo.Category2VO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -94,28 +94,28 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
     @Cacheable(value = {"category"}, key = "#root.methodName")
     @Override
-    public Map<String, List<Catelog2VO>> getCatalogJson() throws InterruptedException {
+    public Map<String, List<Category2VO>> getCategoryJson() throws InterruptedException {
         List<Category> selectList = baseMapper.selectList(null);
         List<Category> level1Categories = getParent_cid(selectList, 0L);
 
-        Map<String, List<Catelog2VO>> parentCid = level1Categories.stream().collect(Collectors.toMap(k -> k.getCatId().toString(), v -> {
+        Map<String, List<Category2VO>> parentCid = level1Categories.stream().collect(Collectors.toMap(k -> k.getCatId().toString(), v -> {
             List<Category> categoryEntities = getParent_cid(selectList, v.getCatId());
-            List<Catelog2VO> catelog2VOS = null;
+            List<Category2VO> category2VOS = null;
             if (!CollectionUtils.isEmpty(categoryEntities)) {
-                catelog2VOS = categoryEntities.stream().map(l2 -> {
-                    Catelog2VO catelog2VO = new Catelog2VO(v.getCatId().toString(), null, l2.getCatId().toString(), l2.getName());
-                    List<Category> level3Catalog = getParent_cid(selectList, l2.getCatId());
-                    if (!CollectionUtils.isEmpty(level3Catalog)) {
-                        List<Catelog2VO.Catelog3VO> collect = level3Catalog.stream().map(l3 -> {
-                            Catelog2VO.Catelog3VO catelog3VO = new Catelog2VO.Catelog3VO(l2.getCatId().toString(), l3.getCatId().toString(), l3.getName());
-                            return catelog3VO;
+                category2VOS = categoryEntities.stream().map(l2 -> {
+                    Category2VO category2VO = new Category2VO(v.getCatId().toString(), null, l2.getCatId().toString(), l2.getName());
+                    List<Category> level3Category = getParent_cid(selectList, l2.getCatId());
+                    if (!CollectionUtils.isEmpty(level3Category)) {
+                        List<Category2VO.Category3VO> collect = level3Category.stream().map(l3 -> {
+                            Category2VO.Category3VO category3VO = new Category2VO.Category3VO(l2.getCatId().toString(), l3.getCatId().toString(), l3.getName());
+                            return category3VO;
                         }).collect(Collectors.toList());
-                        catelog2VO.setCatalog3List(collect);
+                        category2VO.setCategory3List(collect);
                     }
-                    return catelog2VO;
+                    return category2VO;
                 }).collect(Collectors.toList());
             }
-            return catelog2VOS;
+            return category2VOS;
         }));
         return parentCid;
     }

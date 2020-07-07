@@ -817,7 +817,7 @@
                         <ul>
                             <li th:each="category:${result.categories}">
                                 <a href="#"
-                                   th:href="${'javascript:searchProduct(&quot;catalog3Id&quot;,'+category.categoryId+')'}"
+                                   th:href="${'javascript:searchProduct(&quot;category3Id&quot;,'+category.categoryId+')'}"
                                    th:text="${category.categoryName}"></a>
                             </li>
                         </ul>

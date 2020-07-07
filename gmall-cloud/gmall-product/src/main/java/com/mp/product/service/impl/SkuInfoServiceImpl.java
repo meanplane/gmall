@@ -148,12 +148,12 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo> impl
         // spu 介绍
         CompletableFuture<Void> descFuture = infoFuture.thenAcceptAsync(res -> {
             SpuInfoDesc spuInfoDescEntity = spuInfoDescService.getById(res.getSpuId());
-            skuItemVO.setDesp(spuInfoDescEntity);
+            skuItemVO.setDesc(spuInfoDescEntity);
         }, threadPoolExecutor);
 
         CompletableFuture<Void> baseAttrFuture = infoFuture.thenAcceptAsync(res -> {
             // spu 的规格参数信息
-            List<SpuItemAttrGroupVO> attrGroupVOS = attrGroupService.getAttrGroupWithAttrsBySpuIdAndCatalogId(res.getSpuId(), res.getCategoryId());
+            List<SpuItemAttrGroupVO> attrGroupVOS = attrGroupService.getAttrGroupWithAttrsBySpuIdAndCategoryId(res.getSpuId(), res.getCategoryId());
             skuItemVO.setGroupAttrs(attrGroupVOS);
         }, threadPoolExecutor);
 
@@ -173,6 +173,7 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo> impl
 //        }, threadPoolExecutor);
 
 //        CompletableFuture.allOf(saleAttrFuture, descFuture, baseAttrFuture, imageFuture, seckillFuture).get();
+                CompletableFuture.allOf(saleAttrFuture, descFuture, baseAttrFuture, imageFuture).get();
         return skuItemVO;
     }
 
